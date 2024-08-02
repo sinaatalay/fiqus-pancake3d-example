@@ -26,12 +26,10 @@ There are two ways of running the simulation: locally or with GitHub Codespaces.
 
 You don't have to install anything to run it with GitHub Codespaces.
 
-1.  [Fork](https://github.com/sinaatalay/fiqus-pancake3d-example/fork) the repository.
-2.  Navigate to the forked repository.
-3.  Click the <> **Code** button, then click the **Codespaces** tab, and then click **Create codespace on main**.
+1.  Click the <> **Code** button, then click the **Codespaces** tab, and then click **Create codespace on main**.
 
-    [Visual Studio Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) will be opened with a ready-to-use development environment.
+    [Visual Studio Code for the Web](https://code.visualstudio.com/docs/editor/vscode-web) will be opened with a ready-to-use development environment. It may take a couple of minutes.
 
-4.  Press **F5** to run the simulation.
+2.  Press **F5** to run the simulation.
 
 This is done with [Development containers](https://containers.dev/), and the environment is defined in the [`.devcontainer/devcontainer.json`](https://github.com/sinaatalay/fiqus-pancake3d-example/blob/main/.devcontainer/devcontainer.json) file. Dev containers can also be run locally using various [supporting tools and editors](https://containers.dev/supporting).
