@@ -9,5 +9,5 @@
     "ghcr.io/devcontainers/features/python:1": {}
   },
   // Use 'onCreateCommand' to run commands after the container is created inside the container:
-  "onCreateCommand": "sudo apt-get update && sudo apt-get install ffmpeg libsm6 libxext6 -y"
+  "onCreateCommand": "sudo apt-get update && sudo apt-get install libglu1-mesa libxi-dev libxmu-dev libglu1-mesa-dev"
 }
