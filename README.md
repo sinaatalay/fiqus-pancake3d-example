@@ -22,7 +22,7 @@ There are two ways of running the simulation: locally or with GitHub Codespaces.
     python run_fiqus.py
     ```
 
-## Run with GitHub Codespaces.
+## Run with GitHub Codespaces
 
 You don't have to install anything to run it with GitHub Codespaces.
 
