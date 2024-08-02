@@ -78,7 +78,7 @@ magnet:
               turnNumber: 10.2
               whichPancakeCoil: 1
 
-          - quantity: solutionVector
+          - quantity: electromagneticSolutionVector
             relative: 0.005 # 0.5 percent
             absolute: 30
             normType: L2Norm
@@ -95,7 +95,7 @@ magnet:
             turnNumber: 10.2
             whichPancakeCoil: 1
 
-        - quantity: solutionVector
+        - quantity: electromagneticSolutionVector
           relative: 0.005 # 0.5 percent
           absolute: 60
           normType: L2Norm
@@ -121,7 +121,7 @@ magnet:
           relativeThickness: 0.0125
           electricFieldCriterion: 0.0001
           nValue: 30.0
-          criticalCurrentAtInitialTemperature: 770
+          criticalCurrentAtReferenceTemperatureAndField: 770
           minimumPossibleResistivity: 1.0e-20
           maximumPossibleResistivity: 1.0e-4
 
@@ -189,3 +189,17 @@ magnet:
           whichPancakeCoil: 1
       - quantity: currentThroughCoil
       - quantity: voltageBetweenTerminals
+
+power_supply: 
+  t_control_LUT:
+    - 0
+    - 50
+    - 60.03
+    - 80
+    - 90
+  I_control_LUT:
+    - 0
+    - 130
+    - 130
+    - 0
+    - 0
