@@ -1,4 +1,4 @@
-# [FiQuS/Pancake3D](doi.org/10.1088/1361-6668/ad3f83) Example
+# [FiQuS/Pancake3D](https://doi.org/10.1088/1361-6668/ad3f83) Example
 
 This is a transient magneto-thermal quench simulation of a no-insulation HTS pancake coil with FiQuS/Pancake3D, developed at CERN.
 
