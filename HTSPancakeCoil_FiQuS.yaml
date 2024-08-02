@@ -155,13 +155,16 @@ magnet:
     initialConditions:
       temperature: 4.0 # 4 K
 
-    localDefects:
-      criticalCurrentDensity:
-        value: 0
-        startTurn: 10
-        endTurn: 10.4
-        startTime: 60
-        whichPancakeCoil: 1
+    # This is how you would quench the magnet:
+    # Currently, there is a small bug with `startTime`. It will be fixed soon.
+    
+    # localDefects:
+    #   criticalCurrentDensity:
+    #     value: 0
+    #     startTurn: 10
+    #     endTurn: 10.4
+    #     startTime: 60
+    #     whichPancakeCoil: 1
 
     quantitiesToBeSaved:
       - quantity: temperature
@@ -194,7 +197,7 @@ power_supply:
   t_control_LUT:
     - 0
     - 50
-    - 60.03
+    - 70
     - 80
     - 90
   I_control_LUT:
