@@ -1,0 +1,191 @@
+# IMPORTANT NOTE BELOW:
+# In vs code, download the extension "YAML" to get the JSON schema support (auto-completion,
+# validation, hover information, etc.)
+
+general:
+  magnet_name: HTSPancakeCoil
+
+run:
+  type: start_from_yaml
+  launch_gui: false
+  overwrite: false
+
+magnet:
+  type: Pancake3D
+  geometry:
+    numberOfPancakes: 1
+    gapBetweenPancakes: 0.5e-3 # 0.5 mm
+
+    winding:
+      innerRadius: 5.0e-3 # 5 mm
+      thickness: 120.0e-6 # 120 um
+      height: 4.042e-3 # 4.042 mm
+      numberOfTurns: 20
+
+    contactLayer:
+      thinShellApproximation: True
+      thickness: 10.0e-6 # 10 um
+
+    terminals:
+      inner:
+        name: innerTerminal
+        thickness: 1.0e-3 # 1 mm
+
+      outer:
+        name: outerTerminal
+        thickness: 1.0e-3 # 1 mm
+
+    air:
+      type: cylinder
+      radius: 52.0e-3 # 52 mm
+      axialMargin: 22.0e-3 # 22 mm
+      shellTransformation: false
+
+  mesh:
+    minimumElementSize: 0.989
+    maximumElementSize: 6
+    winding:
+      axialNumberOfElements: 8
+      azimuthalNumberOfElementsPerTurn: 60
+      radialNumberOfElementsPerTurn: 1
+      axialDistributionCoefficient: 0.5
+      elementType: prism
+
+    contactLayer:
+      radialNumberOfElementsPerTurn:
+        - 1
+
+  solve:
+    type: weaklyCoupled
+
+    time:
+      start: 0
+      end: 100
+      timeSteppingType: adaptive
+      extrapolationOrder: 1
+
+      adaptiveSteppingSettings:
+        initialStep: 0.001 # 0.001 s
+        minimumStep: 0.000000001 # 0.000001 s
+        maximumStep: 2 # 2 s
+        integrationMethod: Euler
+
+        tolerances:
+          - quantity: temperature
+            relative: 0.004 # 0.4 percent
+            absolute: 0.001 # 0.001 K
+            position:
+              turnNumber: 10.2
+              whichPancakeCoil: 1
+
+          - quantity: solutionVector
+            relative: 0.005 # 0.5 percent
+            absolute: 30
+            normType: L2Norm
+
+    nonlinearSolver:
+      maximumNumberOfIterations: 20
+      relaxationFactor: 0.7
+
+      tolerances:
+        - quantity: temperature
+          relative: 0.005 # 0.5
+          absolute: 0.0001 # 0.0001 K
+          position:
+            turnNumber: 10.2
+            whichPancakeCoil: 1
+
+        - quantity: solutionVector
+          relative: 0.005 # 0.5 percent
+          absolute: 60
+          normType: L2Norm
+
+    winding:
+      shuntLayer:
+        material:
+          name: Copper
+          relativeHeight: 0.0104
+
+      material:
+        - name: Copper
+          relativeThickness: 0.35
+          residualResistanceRatio: 100.0
+          residualResistanceRatioReferenceTemperature: 295.0
+        - name: Hastelloy
+          relativeThickness: 0.625
+        - name: Silver
+          relativeThickness: 0.0125
+          residualResistanceRatio: 100.0
+          residualResistanceRatioReferenceTemperature: 295.0
+        - name: HTSSuperPower
+          relativeThickness: 0.0125
+          electricFieldCriterion: 0.0001
+          nValue: 30.0
+          criticalCurrentAtInitialTemperature: 770
+          minimumPossibleResistivity: 1.0e-20
+          maximumPossibleResistivity: 1.0e-4
+
+    contactLayer:
+      numberOfThinShellElements: 1
+      resistivity: 1.12e-4 # 1.12e-4 Ohm*m
+      material:
+        name: Stainless Steel
+
+    terminals:
+      cooling: fixedTemperature
+      
+      material:
+        name: Copper
+        residualResistanceRatio: 100.0
+        residualResistanceRatioReferenceTemperature: 295.0
+
+      terminalContactLayer:
+        resistivity: 1.12e-4 # 1.12e-4 Ohm*m
+        material:
+          name: Stainless Steel
+
+      transitionNotch:
+        resistivity: 1.12e-3 # 1.12e-3 Ohm*m
+        material:
+          name: Stainless Steel
+
+    air:
+      permeability: 1.2566e-06 # 1.2566e-06 H/m
+
+    initialConditions:
+      temperature: 4.0 # 4 K
+
+    localDefects:
+      criticalCurrentDensity:
+        value: 0
+        startTurn: 10
+        endTurn: 10.4
+        startTime: 60
+        whichPancakeCoil: 1
+
+    quantitiesToBeSaved:
+      - quantity: temperature
+      - quantity: currentDensity
+      - quantity: magneticField
+
+  postproc:
+    timeSeriesPlots:
+      - quantity: axialComponentOfTheMagneticField
+        position:
+          x: 0
+          y: 0
+          z: 0
+      - quantity: magnitudeOfCurrentDensity
+        position:
+          turnNumber: 10.2
+          whichPancakeCoil: 1
+      - quantity: temperature
+        position:
+          turnNumber: 10.2
+          whichPancakeCoil: 1
+      - quantity: resistiveHeating
+        position:
+          turnNumber: 10.2
+          whichPancakeCoil: 1
+      - quantity: currentThroughCoil
+      - quantity: voltageBetweenTerminals
