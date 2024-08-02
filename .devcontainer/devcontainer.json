@@ -9,7 +9,5 @@
     "ghcr.io/devcontainers-contrib/features/hatch:2": {}
   },
   // Use 'onCreateCommand' to run commands after the container is created inside the container:
-  "postCreateCommand": "python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt",
-
-  "postStartCommand": "source .venv/bin/activate"
+  "onCreateCommand": "apt-get update && apt-get install ffmpeg libsm6 libxext6  -y"
 }
