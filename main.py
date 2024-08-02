@@ -1,6 +1,5 @@
 import platform
 import pathlib
-import os
 
 from fiqus import MainFiQuS
 
